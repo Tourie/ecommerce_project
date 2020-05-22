@@ -1,0 +1,11 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}
+    Профиль {{ user.nickname }}
+{% endblock %}
+
+{% block content %}
+    Имя: {{ user.name }}
+    Никнейм: {{ user.username }}
+    Возраст: {{ user.age }}
+{% endblock %}
