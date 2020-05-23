@@ -40,17 +40,17 @@ class MyUserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     BUYER_TYPES = [
-        ('Beginner', 'Beginner'),
-        ('Frequent buyer', 'Frequent buyer')
+        ('Начинающий', 'Начинающий'),
+        ('Опытный покупатель', 'Опытный покупатель')
     ]
-    name = models.CharField(max_length=100, blank=False)
-    username = models.CharField(max_length=256, unique=True)
-    email = models.EmailField(max_length=512)
-    age = models.PositiveIntegerField(blank=False)
+    name = models.CharField(max_length=100, blank=False, verbose_name='Имя')
+    username = models.CharField(max_length=256, unique=True, verbose_name='Никнейм')
+    email = models.EmailField(max_length=512, unique=True)
+    age = models.PositiveIntegerField(blank=False, verbose_name="Возраст")
     activity = models.CharField(
         max_length=100,
         choices=BUYER_TYPES,
-        default='Beginner'
+        default='Начинающий'
     )
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
