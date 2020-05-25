@@ -60,5 +60,5 @@ class UserUpdateForm(forms.ModelForm):
 
     def clean_name(self):
         if self.is_valid():
-            name = self.cleaned_data['name']
-            return name
+            name = self.cleaned_data['name'].lower()
+            return name.capitalize()
