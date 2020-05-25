@@ -1,0 +1,14 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}
+    Удаление страницы
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'user_detail_delete_url' username=user.username %}" method="post">
+        {% csrf_token %}
+        <h3>Вы точно хотите удалить профиль <b>"{{ user.username }}"</b>?</h3>
+        <a href="{% url 'user_detail_url' username=user.username %}">Отмена</a>
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+{% endblock %}

@@ -9,8 +9,27 @@
 {% block content %}
     <h2 class="subtitle">Пользователи:</h2>
     {% for user in users %}
-        <p>
-            {{ user.username }}
-        </p>
+        <div class="card" style="width: 18rem; display: inline-block;">
+            <img src="..." class="card-img-top" alt="Что-то не так с загрузкой. Мы уже поправляем!">
+            <div class="card-body">
+                <h5 class="card-title">{{ user.username }}</h5>
+                {% if user.is_admin %}
+                    <span class="badge badge-pill badge-danger">Admin</span>
+                {% elif user.activity == 'Начинающий' %}
+                    <span class="badge badge-pill badge-success">{{ user.activity }}</span>
+                {% else %}
+                    <span class="badge badge-pill badge-warning">{{ user.activity }}</span>
+                {% endif %}
+                <ul class="user_card__description" style="text-decoration: none; display: block;">
+                    <li class="user_description_item" style="display: block;">
+                        Имя: {{ user.name }}
+                    </li>
+                    <li class="user_description_item" style="display:block;">
+                        Возраст: {{ user.age }}
+                    </li>
+                </ul>
+                <a href="{% url 'user_detail_url' username=user.username %}" class="btn btn-primary">Посмотреть профиль</a>
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}

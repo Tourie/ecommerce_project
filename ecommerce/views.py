@@ -34,7 +34,7 @@ def logout_view(request):
 
 
 def login_view(request):
-    context = {}
+    context = {'invalid_login': False}
     if request.user.is_authenticated:
         return redirect('main_page_url')
     if request.POST:
@@ -46,7 +46,9 @@ def login_view(request):
             if user:
                 login(request, user)
                 return redirect('main_page_url')
-
+            else:
+                form = UserAuthentificationForm()
+                context['invalid_login'] = True
     else:
         form = UserAuthentificationForm()
     context['login_form'] = form

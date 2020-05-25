@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.shortcuts import reverse
 from django.contrib.auth.models import AbstractUser
 
 
@@ -72,6 +73,12 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+    def get_absolute_url(self):
+        return reverse('user_detail_url', kwargs={'username': self.username})
+
+    def get_update_url(self):
+        return reverse('user_detail_update_url', kwargs={'username': self.username})
 
 
 class Seller(User):

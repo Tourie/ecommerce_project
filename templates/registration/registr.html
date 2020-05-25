@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Register</h2>
+    <h2>Регистрация</h2>
     <form method="POST">{% csrf_token %}
         {% for field in registration_form %}
             <p>
                 {{ field.label_tag }}
                 {{ field }}
 
-                {% if field.hepl_text %}
+                {% if field.help_text %}
                     <small style="color: gray;">{{ field.help_text }}</small>
                 {% endif %}
                 {% for errors in field.errors %}
