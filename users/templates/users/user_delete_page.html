@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{% url 'user_detail_delete_url' username=user.username %}" method="post">
+    <form action="{% url 'user_detail_delete_url' username=request.user.username %}" method="post">
         {% csrf_token %}
         <h3>Вы точно хотите удалить профиль <b>"{{ user.username }}"</b>?</h3>
         <a href="{% url 'user_detail_url' username=user.username %}">Отмена</a>

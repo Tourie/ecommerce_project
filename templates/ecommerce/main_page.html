@@ -1,9 +1,31 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block title %}
-Главная
+    Главная
 {% endblock %}
 
 {% block content%}
-    <h1 class="name">Главная</h1>
+    <h2>Популярное: </h2>
+    {% for item in items %}
+        <div class="card" style="width: 18rem; display: inline-block; margin-right: 15px; margin-bottom: 15px;">
+            <img src="..." class="card-img-top" alt="Что-то не так с загрузкой. Мы уже поправляем!">
+            <div class="card-body" >
+                <h5 class="card-title">{{ item.title }}</h5>
+                <ul class="item_card__description" style="text-decoration: none; display: block;">
+                    <li class="item_description_item" style="display:block;">
+                        Категория: {{ item.category }}
+                    </li>
+                    <li class="item_description_item" style="display:block;">
+                        Цена: {{ item.price }}
+                    </li>
+                    <li class="item_description_item" style="display:block;">
+                        Количество: {{ item.quantity }}
+                    </li>
+                    <li class="item_description_item" style="display:block;">
+                        Магазин: <a href="{% url 'shop_detail_url' title=item.shop.title %}">{{ item.shop.title }}</a>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-primary">Посмотреть подробнее</a>
+            </div>
+    {% endfor %}
 {% endblock %}

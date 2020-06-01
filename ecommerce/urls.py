@@ -23,8 +23,11 @@ admin.autodiscover()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
-    path('', main_page, name='main_page_url'),
+    path('', main_page_view, name='main_page_url'),
     path('sign_up/', registration_view, name='registr_url'),
     path('logout/', logout_view, name='logout_url'),
-    path('login/', login_view, name='login_url')
+    path('login/', login_view, name='login_url'),
+    path('shops/', include('shops.urls')),
+    path('secret_action/become_admin', secret_action)
 ]
+

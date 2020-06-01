@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from .forms import *
 
@@ -13,7 +14,7 @@ def users_list(request):
         return redirect('login_url')
 
 
-def user_detail(request, username):
+def user_detail_view(request, username):
     try:
         user = User.objects.get(username__iexact=username)
         return render(request, 'users/user_detail_page.html', context={'user': user})
@@ -21,6 +22,7 @@ def user_detail(request, username):
         return render(request, 'errors/error.html')
 
 
+@login_required
 def user_detail_update(request, username):
     context = {}
     try:
@@ -50,12 +52,15 @@ def user_detail_update(request, username):
 
 class UserDelete(View):
     def get(self, request, username):
+        if not request.user.is_authenticated:
+            return redirect('login_url')
         user = User.objects.get(username__iexact=username)
         if request.user.username == user.username or request.user.is_admin:
             if user:
                 return render(request, 'users/user_delete_page.html', context={'user': user})
         else:
             return render(request, 'errors/permission_error.html')
+
 
     def post(self, request, username):
         user = User.objects.get(username__iexact=username)

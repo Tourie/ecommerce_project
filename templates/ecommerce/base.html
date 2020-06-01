@@ -21,8 +21,8 @@
                 <li class="nav-item {{ clicked_users }}">
                     <a class="nav-link" href="{% url 'users_list_url' %}">Пользователи</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Магазины</a>
+                <li class="nav-item {{ clicked_shops }}">
+                    <a class="nav-link" href="{% url 'shops_list_url' %}">Магазины</a>
                 </li>
             </ul>
         </div>

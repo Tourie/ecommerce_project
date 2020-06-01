@@ -1,0 +1,20 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}
+    Список доступных магазинов
+{% endblock %}
+
+{% block content %}
+    <h2>Наши зарегистрированные магазины</h2>
+    {% for shop in shops_list %}
+        <div class="card mb-3">
+            <img src="#" class="card-img-top" alt="Что-то не так с загрузкой картинки. Мы скоро все поправим!">
+            <div class="card-body">
+                <h5 class="card-title">{{ shop.title }}</h5>
+                <p class="card-text">{{ shop.description}}</p>
+                <p class="card-text"><small class="text-muted"><a href="{% url 'user_detail_url' username=shop.founder.username %}">{{ shop.founder }}</a></small></p>
+                <a href="{% url 'shop_detail_url' title=shop.title %}" class="btn btn-primary">Профиль магазина</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
