@@ -7,6 +7,13 @@ class Shop(models.Model):
     description = models.TextField()
     founder = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+
+
+class ShopImage(models.Model):
+    image = models.ImageField(upload_to='static/shop_image/')
+
 
 class Item(models.Model):
     title = models.CharField(max_length=512)
@@ -15,13 +22,14 @@ class Item(models.Model):
     category = models.CharField(max_length=256)
     price = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField()
-    #created = models.DateTimeField(auto_now_add=True, auto_now=False)
-   # updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return self.title
 
 
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, blank=True, null=True, default=None, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='item_images/')
-    #created = models.DateTimeField(auto_now_add=True, auto_now=False)
-   # updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    is_active = models.BooleanField(default=True)
+
 # Create your models here.

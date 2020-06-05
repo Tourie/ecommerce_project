@@ -44,7 +44,7 @@ class User(AbstractBaseUser):
         ('Начинающий', 'Начинающий'),
         ('Опытный покупатель', 'Опытный покупатель')
     ]
-    name = models.CharField(max_length=100, blank=False, verbose_name='Имя')
+    name = models.CharField(max_length=100, blank=False, verbose_name='Имя', null=True)
     username = models.CharField(max_length=256, unique=True, verbose_name='Никнейм')
     email = models.EmailField(max_length=512, unique=True)
     age = models.PositiveIntegerField(blank=False, verbose_name="Возраст")
@@ -80,30 +80,3 @@ class User(AbstractBaseUser):
     def get_update_url(self):
         return reverse('user_detail_update_url', kwargs={'username': self.username})
 
-
-class Seller(User):
-    position = models.CharField(max_length=256)
-    organization_name = models.CharField(max_length=512)
-
-
-class Founder(Seller):
-    def add_seller(self, user):
-        pass
-
-    def delete_seller(self, seller):
-        pass
-
-    def edit_position(self, seller):
-        pass
-
-
-class Admin(Founder):
-    def create_founder(self, user):
-        pass
-
-    def block_user(self, user):
-        pass
-
-    def block_organization(self, organization):
-        pass
-# Create your models here.

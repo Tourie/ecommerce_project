@@ -22,7 +22,6 @@ def user_detail_view(request, username):
         return render(request, 'errors/error.html')
 
 
-@login_required
 def user_detail_update(request, username):
     context = {}
     try:
@@ -60,7 +59,6 @@ class UserDelete(View):
                 return render(request, 'users/user_delete_page.html', context={'user': user})
         else:
             return render(request, 'errors/permission_error.html')
-
 
     def post(self, request, username):
         user = User.objects.get(username__iexact=username)

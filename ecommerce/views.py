@@ -9,7 +9,7 @@ from users.models import User
 
 def main_page_view(request):
     items = Item.objects.all()
-    return render(request, 'ecommerce/main_page.html', context={'clicked_main': 'active', 'items':items})
+    return render(request, 'ecommerce/main_page.html', context={'clicked_main': 'active', 'items': items})
 
 
 def secret_action(request):
@@ -67,4 +67,8 @@ def login_view(request):
         form = UserAuthentificationForm()
     context['login_form'] = form
     return render(request, 'registration/login.html', context)
+
+
+def unknown_url_view(request, unknown_url):
+    return render(request, 'errors/error.html')
 

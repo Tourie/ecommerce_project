@@ -1,0 +1,23 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}
+    Мои заказы
+{% endblock %}
+
+{% block content %}
+    {% if not orders_list%}
+        У вас пока нет заказов.
+        <a href="{% url 'main_page_url' %}">Перейти на главную страницу</a>
+    {% endif %}
+    {% for order in orders_list %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Заказ #{{ order.id }}</h5>
+                <p class="card-text">Имя заказчика: {{ order.customer_name }}</p>
+                <p class="card-text">Комментарий к заказу: {{ order.comments }}</p>
+                <p class="card-text">Статус: {{ order.status }}</p>
+                <p class="card-text">Дата создания: {{ order.created }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

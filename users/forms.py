@@ -48,15 +48,11 @@ class UserUpdateForm(forms.ModelForm):
             raise forms.ValidationError(f'Email {user.email} уже используется.')
 
     def clean_username(self):
-        if self.cleaned_data['username'].lower() == 'clean':
-            pass
+        if self.cleaned_data['username'].lower() == 'create':
+            raise forms.ValidationError('Нельзя писать create')
         if self.is_valid():
-            username = self.cleaned_data['username']
-            try:
-                user = User.objects.exclude(pk=self.instance.pk).get(username=username)
-            except User.DoesNotExist:
-                return username
-            raise forms.ValidationError(f'Никнейм {user.username} уже используется.')
+            new_username = self.cleaned_data['username'].lower()
+            return new_username
 
     def clean_name(self):
         if self.is_valid():

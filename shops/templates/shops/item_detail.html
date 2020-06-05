@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block content %}
-    <h2>{{ item.title }}</h2>
+    <img src="{{ item_image.url }}">
+    <h2><b>Название:</b>{{ item.title }}</h2>
+    <p><b>Описание:</b>{{ item.description }}</p>
+    <p><b>Цена:</b>{{ item.price }}</p>
+    <p><b>Количество:</b>{{ item.quantity }}</p>
+    <a href="#" class="btn btn-primary">Купить</a>
 {% endblock %}

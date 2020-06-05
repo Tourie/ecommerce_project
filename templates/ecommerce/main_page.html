@@ -5,10 +5,16 @@
 {% endblock %}
 
 {% block content%}
+    <h1>Добро пожаловать {{ request.user.name }}</h1>
+    <br>
+    <br>
     <h2>Популярное: </h2>
+    {% if not items %}
+        Пока нет вообще товаров. Совсем все туго:(
+    {% endif %}
     {% for item in items %}
         <div class="card" style="width: 18rem; display: inline-block; margin-right: 15px; margin-bottom: 15px;">
-            <img src="..." class="card-img-top" alt="Что-то не так с загрузкой. Мы уже поправляем!">
+
             <div class="card-body" >
                 <h5 class="card-title">{{ item.title }}</h5>
                 <ul class="item_card__description" style="text-decoration: none; display: block;">
@@ -25,7 +31,7 @@
                         Магазин: <a href="{% url 'shop_detail_url' title=item.shop.title %}">{{ item.shop.title }}</a>
                     </li>
                 </ul>
-                <a href="#" class="btn btn-primary">Посмотреть подробнее</a>
+                <a href="{% url 'item_detail_url' title=item.title %}" class="btn btn-primary">Посмотреть подробнее</a>
             </div>
     {% endfor %}
 {% endblock %}

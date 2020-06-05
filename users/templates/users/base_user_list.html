@@ -10,7 +10,6 @@
     <h2 class="subtitle">Пользователи:</h2>
     {% for user in users %}
         <div class="card" style="width: 18rem; display: inline-block; margin-right: 15px; margin-bottom: 15px;">
-            <img src="..." class="card-img-top" alt="Что-то не так с загрузкой. Мы уже поправляем!">
             <div class="card-body" >
                 <h5 class="card-title">{{ user.username }}</h5>
                 {% if user.is_admin %}
