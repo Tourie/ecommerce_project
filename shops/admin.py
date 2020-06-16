@@ -35,4 +35,5 @@ class ShopAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Shop, ShopAdmin)
+admin.site.register(Category)
 

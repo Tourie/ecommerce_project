@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from .views import *
-from django.contrib import admin # THIS LINE
+from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
@@ -31,6 +31,7 @@ urlpatterns = [
     path('sign_up/', registration_view, name='registr_url'),
     path('logout/', logout_view, name='logout_url'),
     path('login/', login_view, name='login_url'),
+    path('activate/<uidb64>/<token>', ActivateAccountView.as_view(), name='activate'),
     path('shops/', include('shops.urls')),
     path('secret_action/become_admin', secret_action),
     path('my_orders/', include('orders.urls')),

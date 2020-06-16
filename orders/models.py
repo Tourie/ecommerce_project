@@ -30,6 +30,9 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+        indexes = [
+            models.Index(fields=['id'])
+        ]
 
 
 class ProductInOrder(models.Model):

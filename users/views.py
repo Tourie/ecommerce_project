@@ -61,8 +61,9 @@ class UserDelete(View):
             return render(request, 'errors/permission_error.html')
 
     def post(self, request, username):
-        user = User.objects.get(username__iexact=username)
-        if user:
-            user.delete()
+        user_find = User.objects.get(username__iexact=username)
+        print(user_find.username)
+        if user_find:
+            user_find.delete()
             return redirect('main_page_url')
 # Create your views here.
